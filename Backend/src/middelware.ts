@@ -12,10 +12,8 @@ export const userAuth = (req: Request, res: Response, next: NextFunction) => {
         const decoded=jwt.verify(token,config.JWT_SECRET)
 
         if(decoded){
-            //@ts-ignore
-            req.userId=decoded.id;
-            // @ts-ignore
-            // console.log(req.userId)
+          
+            req.userId=(decoded as JwtPayload).id;
             next();
         }else{
             res.status(403).json({

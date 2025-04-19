@@ -1,9 +1,9 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 import './App.css'
 import {PluseIcon} from "./assets/Pluse"
 import {Button} from "../src/components/ui/button"
 function App() {
-  const [count, setCount] = useState(0)
+  // const [count, setCount] = useState(0)
 
   return (
     <>

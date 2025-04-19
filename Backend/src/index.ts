@@ -1,3 +1,11 @@
+declare global {
+  namespace Express {
+    export interface Request {
+      userId:string
+    }
+  }
+}
+
 import express from "express"
 import cors from "cors"
 import jwt from "jsonwebtoken"
@@ -97,7 +105,6 @@ app.post("/api/v1/content",userAuth,async (req,res)=>{
             title,
             tags:[],
             type,
-            // @ts-ignore
             userId:req.userId
         
         })
@@ -116,7 +123,7 @@ app.post("/api/v1/content",userAuth,async (req,res)=>{
 
 
 app.get("/api/v1/content",userAuth,async(req,res)=>{
-    // @ts-ignore
+    
     const userId=req.userId;
     // console.log(userId)
     if (!userId) {
@@ -136,7 +143,6 @@ app.delete("/api/v1/content",userAuth,async(req,res)=>{
     const contentID=req.body.contentId;
     await ContentModel.deleteMany({
         _id:contentID,
-        // @ts-ignore
         userId:req.userId
     })
     res.json({
