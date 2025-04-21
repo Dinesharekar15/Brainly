@@ -14,6 +14,7 @@ import { userAuth } from "./middelware"
 import { config } from "./config"
 import {ContentModel,UserModel,LinkModel} from "./db"
 import {z} from "zod"
+import { HashString } from "./utils"
 
 
 
@@ -150,6 +151,69 @@ app.delete("/api/v1/content",userAuth,async(req,res)=>{
     })
 })
 
+app.post("/api/v1/brain/share", userAuth,async(req,res)=>{
+  const share=req.body.share;
+  if(share){
+    const existinguserLink=await LinkModel.findOne({
+      userId:req.userId
+    })
+    if(existinguserLink){
+      res.json({
+        Link:existinguserLink.hash
+      })
+      return
+    }
+    let str=HashString(10);
+    await LinkModel.create({
+      hash:str,
+      userId:req.userId
+    })
+    res.json({
+      Link:str
+    })
+    return
+  }else{
+    await LinkModel.deleteOne({
+      userId:req.userId
+    })
+  }
+
+  res.json({
+    Meg:"Updated the shared link"
+
+  })
+})
+
+app.get("/api/v1/brain/:Link",async(req,res)=>{
+  const sharedLink=req.params.Link
+  const Link=await LinkModel.findOne({
+    hash:sharedLink
+  })
+  if(!Link){
+    res.json({
+      msg:"Please Provide valid link"
+    })
+    return
+  }
+  const Content=await ContentModel.find({
+    userId:Link.userId
+  })
+  
+  const User=await UserModel.findOne({
+    _id:Link.userId
+  })
+  if(!User){
+    res.json({
+      Msg:"user not found shoulde not be the error here"
+    })
+    return
+  }
+
+  res.json({
+    username:User.username,
+    Content:Content
+  })
+})
 
 app.listen(config.PORT,()=>{
     console.log("server is running on port")
