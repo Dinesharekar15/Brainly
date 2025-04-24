@@ -30,7 +30,9 @@ type finalUserSchema=z.infer<typeof userSchema>;
 
 app.post("/api/v1/signup", async (req, res) => {
     const result = userSchema.safeParse(req.body);
+    console.log(req.body)
     if (!result.success) {
+      console.log(result.error.format());
       res.status(400).json({ msg: "provide valid data" });
       return;
     }
@@ -63,6 +65,7 @@ app.post("/api/v1/signup", async (req, res) => {
 
 app.post("/api/v1/signin",async (req, res) => {
     const { username, password } = req.body;
+    console.log(username,password)
   
     try {
       const user = await UserModel.findOne({ username });

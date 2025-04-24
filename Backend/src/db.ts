@@ -2,7 +2,7 @@ import mongoose,{model,Schema,Document} from "mongoose";
 import {config} from "./config"
 mongoose.connect(config.MONGODB_URI)
   .then(() => console.log("✅ MongoDB Connected"))
-  .catch((err) => console.error("❌ MongoDB Error:", err));
+  .catch((err) => console.error(" MongoDB Error:", err));
 
 
   

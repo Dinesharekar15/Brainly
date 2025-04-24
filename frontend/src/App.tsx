@@ -1,16 +1,22 @@
-// import { useState } from 'react'
-import './App.css'
-import {PluseIcon} from "./assets/Pluse"
-import {Button} from "../src/components/ui/button"
+import { useState } from "react";
+import "./App.css";
+import Signin from "./Pages/Signin";
+import Signup from "./Pages/Signup";
+//import Dashboard from "./Pages/Dashboard";
+import { BrowserRouter,Route,Routes } from "react-router-dom";
+import Dashboard from "./Pages/Dashboard";
+
 function App() {
-  // const [count, setCount] = useState(0)
 
   return (
-    <>
-      <Button  starticon={<PluseIcon size='lg'/>} variant='secondary' size='lg' text='Add Content'/>
-      <Button starticon={<PluseIcon size='lg'/>} variant='primary' size='md' text='Add Content'/>
-    </>
-  )
+    <BrowserRouter>
+    <Routes>
+      <Route path="/signin" element={<Signin/>}/>
+      <Route path="/signup" element={<Signup/>}/>
+      <Route path="/dashboard" element={<Dashboard/>}/>
+    </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
