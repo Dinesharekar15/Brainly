@@ -1,6 +1,5 @@
 
 
-import React from 'react'
 import { iconSizeVariant,IconProps } from './index'
 export const Shareicon = (props:IconProps) => {
   return (

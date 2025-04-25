@@ -151,6 +151,7 @@ app.delete("/api/v1/content",userAuth,async(req,res)=>{
     })
     res.json({
         msg:"Content deleted Successufully"
+
     })
 })
 

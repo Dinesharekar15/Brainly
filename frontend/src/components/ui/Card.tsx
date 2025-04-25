@@ -1,12 +1,14 @@
 import { ReactElement } from "react";
-import { Link } from "react-router-dom";
 import Delteicon from "../../assets/Delete";
 import { Shareicon } from "../../assets/Shareicon";
+import { BACKEND_URL } from "../../../util";
+import axios from "axios";
 interface cardprops {
   title: string;
   icon: ReactElement;
   link: string;
-  type: "twitter" | "youtube";
+  type: string; //here shoulde be the "youtube" | "twitter"
+  contentID?:string
 }
 
 const Card = (prop: cardprops) => {
@@ -18,16 +20,25 @@ const Card = (prop: cardprops) => {
           <h3 className="text-2xl font-semibold">{prop.title}</h3>
         </div>
         <div className="text-gray-400 flex gap-2">
-          <Link to="/delete">
-            <span>
+         
+            <span className="cursor-pointer" onClick={async()=>{
+              await axios.delete(BACKEND_URL+"/api/v1/content",{
+                data:{
+                  contentId:prop.contentID
+                },headers:{
+                  Authorization:localStorage.getItem("token")
+                }
+              })
+              alert("content deleted")
+            }}>
               <Delteicon />
             </span>
-          </Link>
-          <Link to="/share">
-            <span>
+        
+         
+            <span className="cursor-pointer">
               <Shareicon size="lg" />
             </span>
-          </Link>
+         
         </div>
       </div>
       <div className="aspect-w-16 aspect-h-9 mb-4 mt-6">

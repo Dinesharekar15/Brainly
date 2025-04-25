@@ -1,4 +1,3 @@
-import React from "react";
 import Crossicon from "../../assets/Crossicon";
 import { Button } from "./Button";
 import Input from "./Input";

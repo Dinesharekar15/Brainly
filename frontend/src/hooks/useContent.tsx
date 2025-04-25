@@ -2,10 +2,19 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import { BACKEND_URL } from "../../util";
+export interface ContentType {
+  _id: string;
+  type: string;
+  title: string;
+  link:string
+  // add any other properties your content has (like link, description etc.)
+}
 export const useContent = () => {
-  const [content, setContent] = useState([]);
+  const [content, setContent] = useState<ContentType[]>([]);
 
-  function refresh() {
+  
+
+  useEffect(() => {
     axios
       .get(BACKEND_URL + "/api/v1/content", {
         headers: {
@@ -15,18 +24,6 @@ export const useContent = () => {
       .then((response) => {
         setContent(response.data.content);
       });
-  }
-
-  useEffect(() => {
-    refresh(); // initial fetch
-
-    const interval = setInterval(() => {
-      refresh(); // periodic fetch
-    }, 2 * 1000); // every 10 seconds
-
-    return () => {
-      clearInterval(interval);
-    };
   }, []);
 
   return content;
