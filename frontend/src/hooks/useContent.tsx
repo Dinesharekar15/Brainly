@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import { BACKEND_URL } from "../../util";
+const BACKEND_URL=import.meta.env.VITE_BACKEND_URL
+// console.log("URL :",BACKEND_URL)
 export interface ContentType {
   _id: string;
   type: string;

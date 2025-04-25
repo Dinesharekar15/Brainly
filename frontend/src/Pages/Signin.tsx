@@ -2,7 +2,7 @@ import Input from '../components/ui/Input'
 import { Button } from '../components/ui/Button'
 import { useRef } from 'react'
 import axios from 'axios'
-import { BACKEND_URL } from '../../util'
+const BACKEND_URL=import.meta.env.VITE_BACKEND_URL
 import { useNavigate } from 'react-router-dom'
 const Signin = () => {
     const navigate=useNavigate();

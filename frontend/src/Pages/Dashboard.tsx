@@ -9,9 +9,10 @@ import { useContent } from '../hooks/useContent.tsx';
 import Youtube from '../assets/Youtube.tsx';
 import Twitter from '../assets/Twitter.tsx';
 import axios from 'axios';
-import { BACKEND_URL } from '../../util.ts';
+// import { BACKEND_URL } from '../../util.ts';
 import { ContentType } from '../hooks/useContent.tsx';
 import { useEffect } from 'react';
+const BACKEND_URL=import.meta.env.VITE_BACKEND_URL
 const Dashboard = () => {
     const [open, setOpen] = useState(false);
     const content=useContent();

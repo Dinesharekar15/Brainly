@@ -4,7 +4,7 @@ import Input from "./Input";
 import { useRef } from "react";
 import axios from "axios";
 import { useState } from "react";
-import { BACKEND_URL } from "../../../util";
+const BACKEND_URL=import.meta.env.VITE_BACKEND_URL
 type ContentModelProps = {
   open: boolean;
   onClose: () => void;

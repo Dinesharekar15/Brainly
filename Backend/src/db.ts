@@ -1,6 +1,10 @@
 import mongoose,{model,Schema,Document} from "mongoose";
-import {config} from "./config"
-mongoose.connect(config.MONGODB_URI)
+// import {config} from "./config"
+import dotenv from 'dotenv'
+dotenv.config()
+const MONGODB_URI:any=process.env.MONGODB_URI
+
+mongoose.connect(MONGODB_URI)
   .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => console.error(" MongoDB Error:", err));
 

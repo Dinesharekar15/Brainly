@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import Delteicon from "../../assets/Delete";
 import { Shareicon } from "../../assets/Shareicon";
-import { BACKEND_URL } from "../../../util";
+const BACKEND_URL=import.meta.env.VITE_BACKEND_URL
 import axios from "axios";
 interface cardprops {
   title: string;

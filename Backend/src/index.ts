@@ -11,13 +11,15 @@ import cors from "cors"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 import { userAuth } from "./middelware"
-import { config } from "./config"
 import {ContentModel,UserModel,LinkModel} from "./db"
 import {z} from "zod"
 import { HashString } from "./utils"
 
+import dotenv from "dotenv"
+dotenv.config()
 
-
+const JWT_SECRET=process.env.JWT_SECRET;
+// console.log(JWT_SECRET)
 const app=express();
 app.use(express.json());
 app.use(cors())
@@ -50,7 +52,8 @@ app.post("/api/v1/signup", async (req, res) => {
   
       const token = jwt.sign({
         id:user._id
-      },config.JWT_SECRET);
+        //@ts-ignore
+      },JWT_SECRET);
   
       res.json({
         msg: "user created successfully!",
@@ -83,8 +86,8 @@ app.post("/api/v1/signin",async (req, res) => {
   
       const token=jwt.sign({
         id:user._id,
-
-      },config.JWT_SECRET)
+        //@ts-ignore
+      },JWT_SECRET)
   
       res.status(202).json({
         msg: "Logged in successfully",
@@ -219,6 +222,6 @@ app.get("/api/v1/brain/:Link",async(req,res)=>{
   })
 })
 
-app.listen(config.PORT,()=>{
+app.listen(process.env.PORT,()=>{
     console.log("server is running on port")
 })
